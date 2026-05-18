@@ -2,6 +2,7 @@ from scipy.io.wavfile import write
 import numpy as np
 import sounddevice as sd
 import argparse
+import random
 
 aleatoric_parser = argparse.ArgumentParser(description="Aleatoric Music Generator")
 aleatoric_parser.add_argument(
@@ -45,7 +46,20 @@ def generate_song() -> np.ndarray:
 
     Returns: np.ndarray of generated song.
     """
+    print("Parameters Generated: \n" + "="*20 )
 
+    structure = random.choice(STRUCTURES)
+    print(f"Structure: {structure}")
+    
+    base_scale_notes_as_list = [key for key in BASE_SCALE_NOTES]
+    key = random.choice(base_scale_notes_as_list)
+    key_frequency = BASE_SCALE_NOTES[key]
+    print(f"Key Chosen: {key} || Frequency: {key_frequency}")
+
+    bpm = random.randint(80, 160)
+    print(f"BPM: {bpm}")
+
+    print("="*20 )
 
 if __name__ == "__main__":
     generated_song = generate_song()
