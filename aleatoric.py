@@ -23,6 +23,22 @@ CHORDS = [
     "vi-IV-I-V",
 ]
 
+BASE_SCALE_NOTES = {
+    "A3": 220.0000,
+    "ASHARP3": 233.0819,
+    "B3": 246.9417,
+    "C4": 261.6526,
+    "CSHARP4": 277.1826,
+    "D4": 293.5548,
+    "DSHARP4": 311.1270,
+    "E4": 329.6276,
+    "F4": 349.2282,
+    "FSHARP4": 369.9944,
+    "G4": 391.9954,
+    "GSHARP4": 415.3047,
+    "A4": 440.0000,
+}
+
 
 def generate_song() -> np.ndarray:
     """With specific parameters.
