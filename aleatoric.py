@@ -12,16 +12,16 @@ args = aleatoric_parser.parse_args()
 
 STRUCTURES = ["AABB/CC", "ABAB/CD", "AB/CDDD"]
 CHORDS = [
-    "I-IV-ii-V",
-    "I-vi-ii-V",
-    "I-iii-IV-iv",
-    "I-V-ii-V",
-    "I-vi-IV-V",
-    "IV-I-vi-IV",
-    "I-V-vi-I",
-    "I-IV-iv-I",
-    "IV-V-I-I",
-    "vi-IV-I-V",
+    ["I", "IV", "ii", "V"],
+    ["I", "vi", "ii", "V"],
+    ["I", "iii", "IV", "iv"],
+    ["I", "V", "ii", "V"],
+    ["I","vi","IV","V"],
+    ["IV", "I", "vi", "IV"],
+    ["I", "V", "vi", "I"],
+    ["I", "IV", "iv", "I"],
+    ["IV", "V", "I", "I"],
+    ["vi", "IV", "I", "V"],
 ]
 
 BASE_SCALE_NOTES = {
