@@ -40,6 +40,14 @@ BASE_SCALE_NOTES = {
     "A4": 440.0000,
 }
 
+def generate_sawtooth(frequency: float, eighth_note_duration: float) -> np.ndarray:
+    """For a given frequency and eighth note duration, generate a sawtooth wave.
+    
+    frequency (float): Song Frequency in Hz
+    eighth_note_duration (float): Duration for each eighth note
+
+    Returns: Sawtooth wave as Numpy Array
+    """
 
 def generate_song() -> np.ndarray:
     """With specific parameters.
