@@ -67,10 +67,10 @@ def generate_song() -> np.ndarray:
     # For the structure, get each letter. Each letter gets a unique chord.
     all_letters = [character for character in structure if character.isalpha()]
     unique_letters = list(dict.fromkeys(all_letters))
-    chords = random.sample(CHORDS, 3)
+    chords = random.sample(CHORDS, len(unique_letters))
     unique_chords = dict(zip(unique_letters, chords))
     for letter, chord in unique_chords.items():
-        print(f'{letter} Chord: {chord}')
+        print(f'{letter} Chords: {chord}')
     
     base_scale_notes_as_list = [key for key in BASE_SCALE_NOTES]
     key = random.choice(base_scale_notes_as_list)
@@ -83,7 +83,20 @@ def generate_song() -> np.ndarray:
     eighth_note_duration = 0.5 / bps
     print(f"BPM: {bpm} || BPS: {bps} || Eighth-Note Duration: {eighth_note_duration}")
 
-    print("="*20 )
+    print("="*20 + "\n")
+    letter_audio = {} # Audio for each LETTER
+    for letter, chords in unique_chords.items():
+        print(f"Producing Audio for {letter}: \n" + "="*20 )
+        line_audio = [] #Audio for each CHORD
+        for chord in chords:
+            print(f"Chord: {chord}")
+            # We have 8 eighth notes
+            for x in range(8):
+                if random.random() < 0.8:
+                    print(f'\t{x}th note: current chord')
+                else:
+                    print(f'\t{x}th note: major scale')
+        print("="*20)
 
 if __name__ == "__main__":
     generated_song = generate_song()
