@@ -1,4 +1,5 @@
 from scipy.io.wavfile import write
+from scipy.signal import sawtooth
 import numpy as np
 import sounddevice as sd
 import argparse
@@ -40,14 +41,18 @@ BASE_SCALE_NOTES = {
     "A4": 440.0000,
 }
 
-def generate_sawtooth(frequency: float, eighth_note_duration: float) -> np.ndarray:
-    """For a given frequency and eighth note duration, generate a sawtooth wave.
+def generate_sawtooth(frequency: float, eighth_note_duration: float, sample_rate: int) -> np.ndarray:
+    """For a given frequency, eighth note duration and sample_rate, generate a sawtooth wave.
     
-    frequency (float): Song Frequency in Hz
+    frequency (float): Frequency in Hz
     eighth_note_duration (float): Duration for each eighth note
+    sample_rate (int): Sample Rate
 
     Returns: Sawtooth wave as Numpy Array
     """
+    t = np.linspace(0, eighth_note_duration, int(sample_rate * eighth_note_duration), endpoint=False)
+    wave = sawtooth(2.0 * np.pi * 5.0 * t)
+    return wave
 
 def generate_song() -> np.ndarray:
     """With specific parameters.
