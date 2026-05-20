@@ -50,6 +50,14 @@ def generate_song() -> np.ndarray:
 
     structure = random.choice(STRUCTURES)
     print(f"Structure: {structure}")
+
+    # For the structure, get each letter. Each letter gets a unique chord.
+    all_letters = [character for character in structure if character.isalpha()]
+    unique_letters = list(dict.fromkeys(all_letters))
+    chords = random.sample(CHORDS, 3)
+    unique_chords = dict(zip(unique_letters, chords))
+    for letter, chord in unique_chords.items():
+        print(f'{letter} Chord: {chord}')
     
     base_scale_notes_as_list = [key for key in BASE_SCALE_NOTES]
     key = random.choice(base_scale_notes_as_list)
