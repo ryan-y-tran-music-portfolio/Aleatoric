@@ -64,8 +64,11 @@ def generate_song() -> np.ndarray:
     key_frequency = BASE_SCALE_NOTES[key]
     print(f"Key Chosen: {key} || Frequency: {key_frequency}")
 
+    # convert bpm to eighth note duration
     bpm = random.randint(80, 160)
-    print(f"BPM: {bpm}")
+    bps = bpm / 60.0
+    eighth_note_duration = 0.5 / bps
+    print(f"BPM: {bpm} || BPS: {bps} || Eighth-Note Duration: {eighth_note_duration}")
 
     print("="*20 )
 
