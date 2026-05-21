@@ -41,6 +41,19 @@ BASE_SCALE_NOTES = {
     "A4": 440.0000,
 }
 
+MAJOR_SCALE = [0, 2, 4, 5, 7, 9, 11] # First Octave, in semitones
+MAJOR_MINOR_SEMITONES = {
+    "I" : [0, 4, 7],
+    "ii" : [2, 5, 9],
+    "iii" : [4, 7, 11],
+    "IV" : [5, 9, 0],
+    "iv" : [5, 8, 0],
+    "v": [7, 11, 2],
+    "vi" : [9, 0, 4]
+}
+# Major: 1st, +4, +7 || Minor 1st, +3, +7
+# Major-Minor-Minor-Major-Minor-Minor-Minor
+
 def generate_sawtooth(frequency: float, eighth_note_duration: float, sample_rate: int) -> np.ndarray:
     """For a given frequency, eighth note duration and sample_rate, generate a sawtooth wave.
     
@@ -96,6 +109,7 @@ def generate_song() -> np.ndarray:
                     print(f'\t{x}th note: current chord')
                 else:
                     print(f'\t{x}th note: major scale')
+                    semitone_from_base = random.choice(MAJOR_SCALE)
         print("="*20)
 
 if __name__ == "__main__":
