@@ -134,4 +134,6 @@ if __name__ == "__main__":
             f"Song generated. Can be found in current directory as {args.output}."
         )
     else:
-        print("When done, this song will be played directly.")
+        print("Now playing generated song.")
+        sd.play(generated_song, samplerate=SAMPLE_RATE)
+        sd.wait()
