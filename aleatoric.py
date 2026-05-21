@@ -48,11 +48,11 @@ MAJOR_MINOR_SEMITONES = {
     "iii" : [4, 7, 11],
     "IV" : [5, 9, 0],
     "iv" : [5, 8, 0],
-    "v": [7, 11, 2],
+    "V": [7, 11, 2],
     "vi" : [9, 0, 4]
 }
 # Major: 1st, +4, +7 || Minor 1st, +3, +7
-# Major-Minor-Minor-Major-Minor-Minor-Minor
+# Major-Minor-Minor-Major-Minor-Major-Minor
 
 def generate_sawtooth(frequency: float, eighth_note_duration: float, sample_rate: int) -> np.ndarray:
     """For a given frequency, eighth note duration and sample_rate, generate a sawtooth wave.
@@ -96,6 +96,8 @@ def generate_song() -> np.ndarray:
     eighth_note_duration = 0.5 / bps
     print(f"BPM: {bpm} || BPS: {bps} || Eighth-Note Duration: {eighth_note_duration}")
 
+    sample_rate = 48000 # Can be Changed
+
     print("="*20 + "\n")
     letter_audio = {} # Audio for each LETTER
     for letter, chords in unique_chords.items():
@@ -107,9 +109,15 @@ def generate_song() -> np.ndarray:
             for x in range(8):
                 if random.random() < 0.8:
                     print(f'\t{x}th note: current chord')
+                    semitone_from_base = random.choice(MAJOR_MINOR_SEMITONES[chord])
                 else:
                     print(f'\t{x}th note: major scale')
                     semitone_from_base = random.choice(MAJOR_SCALE)
+                
+                frequency = key_frequency * (2 ** (semitone_from_base / 12)) # using key frequency as a reference
+                sawtooth_wave = generate_sawtooth(frequency, eighth_note_duration, sample_rate)
+                line_audio.append(sawtooth_wave)
+        letter_audio[letter] = np.concatenate(line_audio)
         print("="*20)
 
 if __name__ == "__main__":
