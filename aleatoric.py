@@ -10,6 +10,7 @@ aleatoric_parser.add_argument(
     "--output", "-o", type=str, help="Output to WAV instead of Playing Directly"
 )
 args = aleatoric_parser.parse_args()
+SAMPLE_RATE = 48000 # Can be Changed
 
 STRUCTURES = ["AABB/CC", "ABAB/CD", "AB/CDDD"]
 CHORDS = [
@@ -96,8 +97,6 @@ def generate_song() -> np.ndarray:
     eighth_note_duration = 0.5 / bps
     print(f"BPM: {bpm} || BPS: {bps} || Eighth-Note Duration: {eighth_note_duration}")
 
-    sample_rate = 48000 # Can be Changed
-
     print("="*20 + "\n")
     letter_audio = {} # Audio for each LETTER
     for letter, chords in unique_chords.items():
@@ -115,7 +114,7 @@ def generate_song() -> np.ndarray:
                     semitone_from_base = random.choice(MAJOR_SCALE)
                 
                 frequency = key_frequency * (2 ** (semitone_from_base / 12)) # using key frequency as a reference
-                sawtooth_wave = generate_sawtooth(frequency, eighth_note_duration, sample_rate)
+                sawtooth_wave = generate_sawtooth(frequency, eighth_note_duration, SAMPLE_RATE)
                 line_audio.append(sawtooth_wave)
         letter_audio[letter] = np.concatenate(line_audio)
         print("="*20)
@@ -130,8 +129,9 @@ def generate_song() -> np.ndarray:
 if __name__ == "__main__":
     generated_song = generate_song()
     if args.output:
+        write(args.output, SAMPLE_RATE, generated_song)
         print(
-            f"When done, this song will be turned into a WAV file called {args.output}"
+            f"Song generated. Can be found in current directory as {args.output}."
         )
     else:
         print("When done, this song will be played directly.")
