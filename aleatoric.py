@@ -64,7 +64,7 @@ def generate_sawtooth(frequency: float, eighth_note_duration: float, sample_rate
     Returns: Sawtooth wave as Numpy Array
     """
     t = np.linspace(0, eighth_note_duration, int(sample_rate * eighth_note_duration), endpoint=False)
-    wave = sawtooth(2.0 * np.pi * 5.0 * t)
+    wave = sawtooth(2.0 * np.pi * frequency * t)
     return wave
 
 def generate_song() -> np.ndarray:
@@ -119,6 +119,13 @@ def generate_song() -> np.ndarray:
                 line_audio.append(sawtooth_wave)
         letter_audio[letter] = np.concatenate(line_audio)
         print("="*20)
+
+    structure_audio = []
+    for letter in all_letters:
+        structure_audio.append(letter_audio[letter])
+    published_audio = np.concatenate(structure_audio) * 0.2 # Scale from 0.1 - 1.0, in case it's too loud!!!
+    published_audio_as_16bit = np.int16(published_audio * 32767)
+    return published_audio_as_16bit
 
 if __name__ == "__main__":
     generated_song = generate_song()
